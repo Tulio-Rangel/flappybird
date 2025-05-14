@@ -3,20 +3,26 @@ import 'package:flappy_dash/main_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+// Función principal que inicia la aplicación
 void main() {
-  runApp(const MyApp());
+  runApp(const MyApp()); // Ejecuta la aplicación con el widget MyApp como raíz
 }
 
+// Clase principal de la aplicación
 class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+  const MyApp({super.key}); // Constructor de la clase MyApp
 
   @override
   Widget build(BuildContext context) {
+    // Construye el árbol de widgets de la aplicación
     return BlocProvider(
-      create: (BuildContext context) => GameCubit(),
+      // Proporciona el GameCubit a los widgets hijos
+      create: (BuildContext context) =>
+          GameCubit(), // Crea una instancia de GameCubit
       child: const MaterialApp(
-        title: 'Flappy Dash',
-        home: MainPage(),
+        // Define la configuración principal de la aplicación
+        title: 'Flappy Dash', // Título de la aplicación
+        home: MainPage(), // Página principal de la aplicación
       ),
     );
   }

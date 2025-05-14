@@ -1,33 +1,45 @@
-part of 'game_cubit.dart';
+part of 'game_cubit.dart'; // Indica que este archivo es parte del archivo principal 'game_cubit.dart'.
 
+/// Clase que representa el estado del juego.
+/// Utiliza `EquatableMixin` para facilitar la comparación de instancias.
 class GameState with EquatableMixin {
+  /// Constructor de la clase `GameState`.
+  /// - [currentScore]: Puntuación actual del juego (por defecto 0).
+  /// - [currentPlayingState]: Estado actual del juego (por defecto `PlayingState.none`).
   const GameState({
     this.currentScore = 0,
     this.currentPlayingState = PlayingState.none,
   });
 
-  final int currentScore;
-  final PlayingState currentPlayingState;
+  final int currentScore; // Puntuación actual del juego.
+  final PlayingState currentPlayingState; // Estado actual del juego.
 
+  /// Método que crea una copia del estado actual con valores opcionalmente modificados.
+  /// - [currentScore]: Nueva puntuación (si se proporciona).
+  /// - [currentPlayingState]: Nuevo estado del juego (si se proporciona).
   GameState copyWith({
     int? currentScore,
     PlayingState? currentPlayingState,
   }) =>
       GameState(
-        currentScore: currentScore ?? this.currentScore,
-        currentPlayingState: currentPlayingState ?? this.currentPlayingState,
+        currentScore: currentScore ??
+            this.currentScore, // Mantiene la puntuación actual si no se proporciona una nueva.
+        currentPlayingState: currentPlayingState ??
+            this.currentPlayingState, // Mantiene el estado actual si no se proporciona uno nuevo.
       );
 
+  /// Define las propiedades que se utilizarán para comparar instancias de `GameState`.
   @override
   List<Object> get props => [
-        currentScore,
-        currentPlayingState,
+        currentScore, // Incluye la puntuación actual.
+        currentPlayingState, // Incluye el estado actual del juego.
       ];
 }
 
+/// Enumeración que define los posibles estados del juego.
 enum PlayingState {
-  none,
-  playing,
-  paused,
-  gameOver,
+  none, // El juego no ha comenzado.
+  playing, // El juego está en progreso.
+  paused, // El juego está pausado.
+  gameOver, // El juego ha terminado.
 }
