@@ -79,6 +79,10 @@ class FlappyDashRootComponent extends Component
   void update(double dt) {
     // Método que se ejecuta en cada frame del juego.
     super.update(dt);
+
+    // Verifica si Dash está fuera de los límites verticales
+    if (_dash.y < -1000 || _dash.y > 1000) bloc.gameOver();
+
     if (_dash.x >= _lastPipe.x) {
       // Si el personaje principal ha pasado el último tubo, genera más tubos.
       _generatePipes(
