@@ -9,7 +9,7 @@ class HiddenCoin extends PositionComponent {
   HiddenCoin({
     required super.position,
   }) : super(
-          size: Vector2(24, 24), // Tamaño de la moneda (24x24 píxeles).
+          size: Vector2(60, 60), // Tamaño de la moneda (24x24 píxeles).
           anchor:
               Anchor.center, // Punto de anclaje en el centro del componente.
         );
@@ -19,6 +19,7 @@ class HiddenCoin extends PositionComponent {
   void onLoad() {
     super.onLoad();
     // Agrega un hitbox circular para detectar colisiones.
+    debugMode = true; // Activa el modo de depuración para ver el hitbox.
     add(CircleHitbox(
       collisionType: CollisionType.passive,
       // Define el tipo de colisión como pasiva (no afecta a otros objetos).
