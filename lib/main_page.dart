@@ -62,7 +62,7 @@ class _MainPageState extends State<MainPage> {
                   // Muestra un texto centrado si el estado es "none".
                   alignment: Alignment(0, 0.2),
                   child: Text(
-                    'PRESS TO START', // Texto que indica al usuario que presione para comenzar.
+                    'TAP TO START', // Texto que indica al usuario que presione para comenzar.
                     style: TextStyle(
                       color: Colors.black,
                       fontWeight: FontWeight.bold,
