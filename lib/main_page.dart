@@ -4,7 +4,6 @@ import 'package:flappy_dash/flappy_dash_game.dart';
 import 'package:flappy_dash/widget/tap_to_play_widget.dart';
 import 'package:flappy_dash/widget/top_score_widget.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'widget/game_over_widget.dart';
@@ -60,8 +59,12 @@ class _MainPageState extends State<MainPage> {
               GameWidget(game: _flappyDashGame), // Muestra el widget del juego.
               if (state.currentPlayingState.isGameOver)
                 const GameOverWidget(), // Muestra el widget de "Game Over" si el estado es "gameOver".
-              if (state.currentPlayingState.isNone) const TapToPlayWidget(),
-              if (!state.currentPlayingState.isGameOver) const TopScoreWidget()
+              if (state.currentPlayingState.isNone)
+                const TapToPlayWidget(), // Si el estado actual del juego es "none" (no iniciado), muestra el widget TapToPlayWidget,
+              // que indica al jugador que debe tocar la pantalla para comenzar a jugar.
+              if (!state.currentPlayingState.isGameOver)
+                const TopScoreWidget() // Si el estado actual del juego no es "gameOver" (el juego no ha terminado),
+              // muestra el widget TopScoreWidget, que muestra la puntuación actual del jugador.
             ],
           ),
         );

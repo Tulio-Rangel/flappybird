@@ -28,9 +28,11 @@ class TapToPlayWidget extends StatelessWidget {
                       reverse: true), // Anima el texto para que parpadee.
                 )
                 .scale(
-                  begin: const Offset(1.0, 1.0),
-                  end: const Offset(1.2, 1.2),
-                  duration: const Duration(milliseconds: 500),
+                  // Aplica un efecto de escalado al texto.
+                  begin: const Offset(1.0, 1.0), // Escala inicial del texto.
+                  end: const Offset(1.2, 1.2), // Escala final del texto.
+                  duration: const Duration(
+                      milliseconds: 500), // Duración de la animación.
                 ),
           ),
         );
