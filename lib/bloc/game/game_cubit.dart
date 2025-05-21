@@ -1,5 +1,5 @@
-import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 part 'game_state.dart'; // Importa la definición del estado del juego desde 'game_state.dart'.
 
