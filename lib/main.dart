@@ -19,10 +19,12 @@ class MyApp extends StatelessWidget {
       // Proporciona el GameCubit a los widgets hijos
       create: (BuildContext context) =>
           GameCubit(), // Crea una instancia de GameCubit
-      child: const MaterialApp(
+      child: MaterialApp(
         // Define la configuración principal de la aplicación
-        title: 'Flappy Dash', // Título de la aplicación
-        home: MainPage(), // Página principal de la aplicación
+        title: 'Flappy Dash', // Título de la
+        theme: ThemeData(
+            fontFamily: 'Chewy'), // Establece la fuente de la aplicación,
+        home: const MainPage(), // Página principal de la aplicación
       ),
     );
   }

@@ -2,6 +2,7 @@ import 'package:flame/game.dart';
 import 'package:flappy_dash/bloc/game/game_cubit.dart';
 import 'package:flappy_dash/flappy_dash_game.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'widget/game_over_widget.dart';
@@ -58,16 +59,29 @@ class _MainPageState extends State<MainPage> {
               if (state.currentPlayingState == PlayingState.gameOver)
                 const GameOverWidget(), // Muestra el widget de "Game Over" si el estado es "gameOver".
               if (state.currentPlayingState == PlayingState.none)
-                const Align(
+                Align(
                   // Muestra un texto centrado si el estado es "none".
-                  alignment: Alignment(0, 0.2),
-                  child: Text(
-                    'TAP TO START', // Texto que indica al usuario que presione para comenzar.
-                    style: TextStyle(
-                      color: Colors.black,
-                      fontWeight: FontWeight.bold,
-                      fontSize: 28,
-                    ),
+                  alignment: const Alignment(0, 0.2),
+                  child: IgnorePointer(
+                    // Ignora los toques en este widget.
+                    child: const Text(
+                      'TAP TO PLAY', // Texto que indica al usuario que presione para comenzar.
+                      style: TextStyle(
+                          color: Color(0xFF2387FC),
+                          fontWeight: FontWeight.bold,
+                          fontSize: 38,
+                          letterSpacing: 4),
+                    )
+                        .animate(
+                          onPlay: (controller) => controller.repeat(
+                              reverse:
+                                  true), // Anima el texto para que parpadee.
+                        )
+                        .scale(
+                          begin: const Offset(1.0, 1.0),
+                          end: const Offset(1.2, 1.2),
+                          duration: const Duration(milliseconds: 500),
+                        ),
                   ),
                 ),
             ],
