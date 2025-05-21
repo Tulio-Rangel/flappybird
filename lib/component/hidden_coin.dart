@@ -19,7 +19,6 @@ class HiddenCoin extends PositionComponent {
   void onLoad() {
     super.onLoad();
     // Agrega un hitbox circular para detectar colisiones.
-    debugMode = true; // Activa el modo de depuración para ver el hitbox.
     add(CircleHitbox(
       collisionType: CollisionType.passive,
       // Define el tipo de colisión como pasiva (no afecta a otros objetos).

@@ -41,5 +41,19 @@ enum PlayingState {
   none, // El juego no ha comenzado.
   playing, // El juego está en progreso.
   paused, // El juego está pausado.
-  gameOver, // El juego ha terminado.
+  gameOver; // El juego ha terminado.
+
+  bool get isGameOver =>
+      this ==
+      PlayingState.gameOver; // Método para verificar si el juego ha terminado.
+  bool get isPlaying =>
+      this ==
+      PlayingState
+          .playing; // Método para verificar si el juego está en progreso.
+  bool get isPaused =>
+      this ==
+      PlayingState.paused; // Método para verificar si el juego está pausado.
+  bool get isNone =>
+      this ==
+      PlayingState.none; // Método para verificar si el juego no ha comenzado.
 }

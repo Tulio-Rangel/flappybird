@@ -56,7 +56,7 @@ class Dash extends PositionComponent
   void update(double dt) {
     super.update(dt);
     // Si el juego no está en estado "playing", no actualiza la posición.
-    if (bloc.state.currentPlayingState != PlayingState.playing) {
+    if (!bloc.state.currentPlayingState.isPlaying) {
       return;
     }
     // Aplica la gravedad a la velocidad.
@@ -68,7 +68,7 @@ class Dash extends PositionComponent
   /// Método que permite a Dash saltar.
   void jump() {
     // Solo salta si el juego está en estado "playing".
-    if (bloc.state.currentPlayingState != PlayingState.playing) {
+    if (!bloc.state.currentPlayingState.isPlaying) {
       return;
     }
     _velocity = _jumpForce; // Aplica la fuerza de salto.
@@ -92,7 +92,7 @@ class Dash extends PositionComponent
   void onCollision(Set<Vector2> points, PositionComponent other) {
     super.onCollision(points, other);
     // Si el juego no está en estado "playing", no procesa colisiones.
-    if (bloc.state.currentPlayingState != PlayingState.playing) {
+    if (!bloc.state.currentPlayingState.isPlaying) {
       return;
     }
     // Si colisiona con una moneda oculta, aumenta la puntuación y elimina la moneda.

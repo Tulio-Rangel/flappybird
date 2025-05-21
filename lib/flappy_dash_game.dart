@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:flame/components.dart';
 import 'package:flame/events.dart';
 import 'package:flame/game.dart';
@@ -17,9 +19,10 @@ class FlappyDashGame extends FlameGame<FlappyDashWorld>
       : super(
           world: FlappyDashWorld(), // Define el mundo del juego.
           camera: CameraComponent.withFixedResolution(
-            width: 600, // Ancho fijo de la cámara.
-            height: 1000, // Altura fija de la cámara.
-          ),
+              width: 600, // Ancho fijo de la cámara.
+              height: 1000 // Alto fijo de la cámara.
+              )
+            ..viewfinder.zoom = _calculateZoom(), // Calcula el zoom inicial.
         );
 
   final GameCubit gameCubit; // Cubit para manejar el estado del juego.
@@ -40,6 +43,19 @@ class FlappyDashGame extends FlameGame<FlappyDashWorld>
       return KeyEventResult.handled; // Indica que el evento fue manejado.
     }
     return KeyEventResult.ignored; // Ignora otros eventos.
+  }
+
+  /// Calcula el factor de zoom para mantener las proporciones originales.
+  static double _calculateZoom() {
+    final screenWidth = window.physicalSize.width / window.devicePixelRatio;
+    final screenHeight = window.physicalSize.height / window.devicePixelRatio;
+
+    // Calcula el factor de escala basado en la resolución original.
+    final scaleX = screenWidth / 600;
+    final scaleY = screenHeight / 1000;
+
+    // Devuelve el menor factor de escala para evitar distorsión.
+    return scaleX < scaleY ? scaleX : scaleY;
   }
 }
 

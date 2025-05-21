@@ -1,6 +1,8 @@
 import 'package:flame/game.dart';
 import 'package:flappy_dash/bloc/game/game_cubit.dart';
 import 'package:flappy_dash/flappy_dash_game.dart';
+import 'package:flappy_dash/widget/tap_to_play_widget.dart';
+import 'package:flappy_dash/widget/top_score_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -39,8 +41,8 @@ class _MainPageState extends State<MainPage> {
       // Escucha y construye la interfaz en función del estado del GameCubit.
       listener: (context, state) {
         // Escucha los cambios en el estado.
-        if (state.currentPlayingState == PlayingState.none &&
-            _latestState == PlayingState.gameOver) {
+        if (state.currentPlayingState.isNone &&
+            (_latestState?.isGameOver ?? false)) {
           // Si el estado actual es "none" y el último estado fue "gameOver":
           setState(() {
             _flappyDashGame = FlappyDashGame(gameCubit); // Reinicia el juego.
@@ -56,34 +58,10 @@ class _MainPageState extends State<MainPage> {
             // Apila widgets uno encima de otro.
             children: [
               GameWidget(game: _flappyDashGame), // Muestra el widget del juego.
-              if (state.currentPlayingState == PlayingState.gameOver)
+              if (state.currentPlayingState.isGameOver)
                 const GameOverWidget(), // Muestra el widget de "Game Over" si el estado es "gameOver".
-              if (state.currentPlayingState == PlayingState.none)
-                Align(
-                  // Muestra un texto centrado si el estado es "none".
-                  alignment: const Alignment(0, 0.2),
-                  child: IgnorePointer(
-                    // Ignora los toques en este widget.
-                    child: const Text(
-                      'TAP TO PLAY', // Texto que indica al usuario que presione para comenzar.
-                      style: TextStyle(
-                          color: Color(0xFF2387FC),
-                          fontWeight: FontWeight.bold,
-                          fontSize: 38,
-                          letterSpacing: 4),
-                    )
-                        .animate(
-                          onPlay: (controller) => controller.repeat(
-                              reverse:
-                                  true), // Anima el texto para que parpadee.
-                        )
-                        .scale(
-                          begin: const Offset(1.0, 1.0),
-                          end: const Offset(1.2, 1.2),
-                          duration: const Duration(milliseconds: 500),
-                        ),
-                  ),
-                ),
+              if (state.currentPlayingState.isNone) const TapToPlayWidget(),
+              if (!state.currentPlayingState.isGameOver) const TopScoreWidget()
             ],
           ),
         );
