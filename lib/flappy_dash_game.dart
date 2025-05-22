@@ -2,7 +2,9 @@ import 'package:flame/components.dart';
 import 'package:flame/events.dart';
 import 'package:flame/game.dart';
 import 'package:flame_bloc/flame_bloc.dart';
+import 'package:flappy_dash/audio_helper.dart';
 import 'package:flappy_dash/bloc/game/game_cubit.dart';
+import 'package:flappy_dash/service_locator.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
@@ -65,8 +67,11 @@ class FlappyDashWorld extends World
 
   /// Método que se ejecuta al cargar el mundo.
   @override
-  void onLoad() {
+  Future<void> onLoad() async {
     super.onLoad();
+    await getIt
+        .get<AudioHelper>()
+        .initialize(); // Inicializa el helper de audio.
     add(
       FlameBlocProvider<GameCubit, GameState>(
         create: () => game.gameCubit, // Proporciona el cubit del juego.
