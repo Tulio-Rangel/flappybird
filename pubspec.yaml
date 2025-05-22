@@ -36,6 +36,7 @@ dependencies:
   equatable: ^2.0.5
   flutter_bloc: ^8.1.6
   flutter_animate: ^4.5.0
+  flutter_soloud: ^2.0.2
 
 dev_dependencies:
   flutter_lints: ^3.0.0
